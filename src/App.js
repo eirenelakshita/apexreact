@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import API from "./utils/API.js"
 import Chart from "react-apexcharts";
-import Selector from "./components/Selector.js";
+import Selector from "./components/Selector.js"
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
+  state = {
+      search: "",
+      results: [],
       options: {
         chart: {
           id: "basic-bar"
@@ -23,12 +22,34 @@ class App extends Component {
         }
       ]
     };
+
+  processResults = results => {
+      const mapRes = results.map(result => results.main.temp);
+      console.log(mapRes);
   }
+
+  searchWeather = query => {
+       API.search(query)
+       .then(res=>this.setState({results: res.data.list},
+            ()=> this.processResults(this.state.results)
+            ))
+       .catch(err => console.log(err));
+  }
+
+  handleButtonSelect = event => {
+    event.preventDefault();
+//    console.log(event);
+    const value = event.target.value;
+    this.setState({search: "Atlanta,US"},()=>{
+        console.log(this.state.search);
+        this.searchWeather(this.state.search);
+        });
+    }
 
   render() {
     return (
       <div className="app">
-        <Selector />
+        <Selector handleButtonSelect={this.handleButtonSelect} />
         <div className="row">
           <div className="mixed-chart">
             <Chart

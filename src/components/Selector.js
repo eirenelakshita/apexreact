@@ -1,17 +1,13 @@
 import React from "react";
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown';
 
 const Selector = props => (
-    <div class="dropdown show">
-      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" dataToggle="dropdown">
-        Select a City
-      </a>
-
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
-      </div>
-    </div>
+    <DropdownButton id="dropdown-basic-button" title="Select a City">
+        <Dropdown.Item value="Atlanta,US" onClick={props.handleButtonSelect}>Atlanta USA</Dropdown.Item>
+        <Dropdown.Item value="London,UK" onClick={props.handleButtonSelect}>London England</Dropdown.Item>
+        <Dropdown.Item value="Bujumbura,BI" onClick={props.handleButtonSelect}>Bujumbura Burundi</Dropdown.Item>
+    </DropdownButton>
 )
 
 export default Selector;

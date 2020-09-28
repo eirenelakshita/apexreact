@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import API from "./utils/API.js"
 import Chart from "react-apexcharts";
+import Selector from "./components/Selector.js";
 
 class App extends Component {
   constructor(props) {
@@ -26,14 +28,15 @@ class App extends Component {
   render() {
     return (
       <div className="app">
+        <Selector />
         <div className="row">
           <div className="mixed-chart">
             <Chart
-              options={this.state.options}
-              series={this.state.series}
-              type="bar"
-              width="500"
-            />
+                options={this.state.options}
+                series={this.state.series}
+                type="line"
+                width="500"
+              />
           </div>
         </div>
       </div>

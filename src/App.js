@@ -24,8 +24,10 @@ class App extends Component {
     };
 
   processResults = results => {
-      const mapRes = results.map(result => results.main.temp);
+      const mapRes = results.map(result => result.main.temp);
       console.log(mapRes);
+      console.log(this.state.series[0].data);
+      this.setState({series[0].data: mapRes})
   }
 
   searchWeather = query => {

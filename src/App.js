@@ -34,8 +34,9 @@ class App extends Component {
       this.setState({series},()=>console.log("updated: "+this.state.series[0].data));
       let options = {...this.state.options};
       let option = {...options.xaxis};
+      console.log(option.categories);
       option.categories = mapDay;
-      options[1] = option;
+      options.xaxis = option;
       this.setState({options},()=>console.log("updated days: "+this.state.options.xaxis.categories));
   }
 
@@ -61,6 +62,7 @@ class App extends Component {
     return (
       <div className="app">
         <Selector handleButtonSelect={this.handleButtonSelect} />
+        <h1>""</h1>
         <div className="row">
           <div className="mixed-chart">
             <Chart

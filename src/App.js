@@ -25,9 +25,18 @@ class App extends Component {
 
   processResults = results => {
       const mapRes = results.map(result => result.main.temp);
-      console.log(mapRes);
-      console.log(this.state.series[0].data);
-      this.setState({series[0].data: mapRes})
+      const mapDay = results.map(result => result.dt)
+      console.log(mapDay);
+      let series = [...this.state.series];
+      let serie = {...series[0]};
+      serie.data = mapRes;
+      series[0] = serie;
+      this.setState({series},()=>console.log("updated: "+this.state.series[0].data));
+      let options = {...this.state.options};
+      let option = {...options.xaxis};
+      option.categories = mapDay;
+      options[1] = option;
+      this.setState({options},()=>console.log("updated days: "+this.state.options.xaxis.categories));
   }
 
   searchWeather = query => {

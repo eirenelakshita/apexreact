@@ -1,13 +1,14 @@
 import React from "react";
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown';
 
 const Selector = props => (
-    <DropdownButton id="dropdown-basic-button" title="Select a City">
-        <Dropdown.Item value="Atlanta,US" onClick={props.handleButtonSelect}>Atlanta USA</Dropdown.Item>
-        <Dropdown.Item value="London,UK" onClick={props.handleButtonSelect}>London England</Dropdown.Item>
-        <Dropdown.Item value="Bujumbura,BI" onClick={props.handleButtonSelect}>Bujumbura Burundi</Dropdown.Item>
-    </DropdownButton>
+    <div className="form-group">
+        <select {...props}>
+            <option value="Atlanta,US" onChange={props.handleButtonSelect}>Atlanta,US</option>
+            <option value="London,UK" onChange={props.handleButtonSelect}>London,UK</option>
+            <option value="Bujumbura,BI" onChange={props.handleButtonSelect}>Bujumbura,BI</option>
+        </select>
+        <button {...props}>Submit City</button>
+    </div>
 )
 
 export default Selector;

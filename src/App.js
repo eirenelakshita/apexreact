@@ -27,27 +27,40 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  processResults = results => {
+  componentDidMount = (callback) => {
+      this.setState({search: "Atlanta,US"},()=>{
+              console.log(this.state.search);
+              this.searchWeather(this.state.search,this.processX);
+              });
+  }
+
+  processY = results => {
       const mapRes = results.map(result => result.main.temp);
-      const mapDay = results.map(result => result.dt)
-      console.log(mapDay);
       let series = [...this.state.series];
       let serie = {...series[0]};
       serie.data = mapRes;
       series[0] = serie;
       this.setState({series},()=>console.log("updated: "+this.state.series[0].data));
+  }
+
+  processX = results => {
+      const mapDay = results.map(result => result.dt)
+      console.log(mapDay);
       let options = {...this.state.options};
       let option = {...options.xaxis};
+      console.log(option);
       option.categories = mapDay;
       options.xaxis = option;
       console.log(option);
       this.setState({options},()=>console.log(this.state.options.xaxis.categories));
   }
 
-  searchWeather = query => {
+  searchWeather = (query,callback) => {
        API.search(query)
        .then(res=>this.setState({results: res.data.list},
-            ()=> this.processResults(this.state.results)
+            ()=> { this.processY(this.state.results);
+                if (callback) {callback(this.state.results)}
+                }
             ))
        .catch(err => console.log(err));
   }
